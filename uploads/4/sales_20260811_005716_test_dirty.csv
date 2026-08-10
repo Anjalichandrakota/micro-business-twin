@@ -1,0 +1,7 @@
+sale date,product name,qty,price,revenue
+2023-01-01,Apple,10,2.00,20.00
+2023-01-02,,5,1.50,7.50
+invalid-date,Banana,-3,2.00,-6.00
+2023-01-04, Orange ,8,3.00,100.00
+2023-01-01,Apple,10,2.00,20.00
+,,,,

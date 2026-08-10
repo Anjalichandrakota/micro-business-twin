@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What-If Scenarios — AI Business Twin</title>
+  <meta name="description" content="Test business scenarios and see their estimated impact." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-page">
+    <nav class="dashboard-nav">
+      <div class="container">
+        <a href="/" class="nav-logo">AI <span>Business Twin</span></a>
+        <div class="dashboard-nav-links">
+          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/assistant" class="nav-link">AI Assistant</a>
+          <a href="/whatif" class="nav-link active">What-If</a>
+          <a href="/upload" class="nav-link">Upload</a>
+        </div>
+        <div class="dashboard-nav-right">
+          <span class="dashboard-user">Hello, <strong id="user-name">...</strong></span>
+          <button class="btn-logout" id="logout-btn">Log Out</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="dashboard-main">
+      <div class="whatif-container">
+
+        <div class="whatif-page-header">
+          <h1>🔮 What-If Scenarios</h1>
+          <p>Test business decisions before making them. See how changes to pricing, volume, or expenses could impact your revenue and profit.</p>
+        </div>
+
+        <!-- Scenario Form -->
+        <div class="whatif-form-card">
+          <h3>Configure Scenario</h3>
+          <div class="whatif-form-grid">
+            <div class="form-group">
+              <label for="scenario-type">Scenario Type</label>
+              <select id="scenario-type">
+                <option value="price_change">Price Change</option>
+                <option value="quantity_change">Sales Volume Change</option>
+                <option value="expense_change">Expense Change</option>
+                <option value="discount">Apply Discount</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="scenario-product">Product (optional)</label>
+              <select id="scenario-product">
+                <option value="">All Products</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="scenario-pct">Change Percentage (%)</label>
+              <input type="number" id="scenario-pct" value="10" step="0.5" placeholder="e.g. 10 or -15" />
+            </div>
+            <div class="form-group" id="abs-group" style="display:none;">
+              <label for="scenario-abs">Absolute Change (units)</label>
+              <input type="number" id="scenario-abs" value="0" step="1" placeholder="e.g. 50" />
+            </div>
+          </div>
+          <button class="btn btn-primary whatif-run-btn" id="run-scenario">Run Scenario</button>
+          <div class="auth-message" id="whatif-message" style="margin-top: 12px;"></div>
+        </div>
+
+        <!-- Results -->
+        <div class="whatif-results" id="whatif-results">
+          <h3>Scenario Results</h3>
+
+          <div class="whatif-comparison">
+            <div class="whatif-col">
+              <div class="whatif-col-title">Current</div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Revenue</div>
+                <div class="whatif-metric-value" id="cur-revenue">—</div>
+              </div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Expenses</div>
+                <div class="whatif-metric-value" id="cur-expenses">—</div>
+              </div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Profit</div>
+                <div class="whatif-metric-value" id="cur-profit">—</div>
+              </div>
+            </div>
+
+            <div class="whatif-arrow">→</div>
+
+            <div class="whatif-col projected">
+              <div class="whatif-col-title">Projected</div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Revenue</div>
+                <div class="whatif-metric-value" id="proj-revenue">—</div>
+              </div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Expenses</div>
+                <div class="whatif-metric-value" id="proj-expenses">—</div>
+              </div>
+              <div class="whatif-metric">
+                <div class="whatif-metric-label">Profit</div>
+                <div class="whatif-metric-value" id="proj-profit">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="whatif-impact">
+            <div class="whatif-impact-grid">
+              <div class="impact-item">
+                <div class="impact-label">Revenue Impact</div>
+                <div class="impact-value" id="impact-revenue">—</div>
+              </div>
+              <div class="impact-item">
+                <div class="impact-label">Profit Impact</div>
+                <div class="impact-value" id="impact-profit">—</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="whatif-explanation" id="whatif-explanation"></div>
+          <div class="whatif-disclaimer-text" id="whatif-disclaimer"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/whatif.js"></script>
+</body>
+</html>

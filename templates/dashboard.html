@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — AI Business Twin</title>
+  <meta name="description" content="Your AI Business Twin dashboard with analytics and insights." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-page">
+
+    <!-- Dashboard Navbar -->
+    <nav class="dashboard-nav">
+      <div class="container">
+        <a href="/" class="nav-logo">AI <span>Business Twin</span></a>
+        <div class="dashboard-nav-links">
+          <a href="/dashboard" class="nav-link active" id="nav-dashboard">Dashboard</a>
+          <a href="/assistant" class="nav-link" id="nav-assistant">AI Assistant</a>
+          <a href="/whatif" class="nav-link" id="nav-whatif">What-If</a>
+          <a href="/upload" class="nav-link" id="nav-upload">Upload</a>
+        </div>
+        <div class="dashboard-nav-right">
+          <span class="dashboard-user">Hello, <strong id="user-name">...</strong></span>
+          <button class="btn-logout" id="logout-btn">Log Out</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+      <!-- Loading state -->
+      <div class="dashboard-loading" id="loading-state">
+        <div class="loading-spinner"></div>
+        <p>Loading your business data...</p>
+      </div>
+
+      <!-- Empty state (no data) -->
+      <div class="dashboard-empty" id="empty-state" style="display:none;">
+        <div class="dashboard-welcome-icon">✦</div>
+        <h1>Welcome to AI Business Twin</h1>
+        <p>Your account is ready. Start by uploading your business data to see analytics.</p>
+        <div style="margin-top: 32px;">
+          <a href="/upload" class="btn btn-primary" style="text-decoration: none;">Upload Data</a>
+        </div>
+      </div>
+
+      <!-- Full dashboard -->
+      <div class="dashboard-grid" id="dashboard-content" style="display:none;">
+
+        <!-- Header row -->
+        <div class="dash-page-header">
+          <div>
+            <h1 id="biz-name">Business Dashboard</h1>
+            <p class="dash-page-subtitle" id="biz-info">Loading...</p>
+          </div>
+          <div class="dash-header-actions">
+            <div class="date-filter">
+              <input type="date" id="date-from" class="date-input" />
+              <span>to</span>
+              <input type="date" id="date-to" class="date-input" />
+              <button class="btn btn-sm btn-primary" id="apply-filter">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="kpi-grid" id="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-icon revenue-icon">💰</div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Revenue</span>
+              <span class="kpi-value" id="kpi-revenue">—</span>
+              <span class="kpi-trend" id="kpi-revenue-trend"></span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon profit-icon">📈</div>
+            <div class="kpi-info">
+              <span class="kpi-label">Gross Profit</span>
+              <span class="kpi-value" id="kpi-profit">—</span>
+              <span class="kpi-trend" id="kpi-margin"></span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon orders-icon">🛒</div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Orders</span>
+              <span class="kpi-value" id="kpi-orders">—</span>
+              <span class="kpi-trend" id="kpi-aov"></span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon expense-icon">💸</div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Expenses</span>
+              <span class="kpi-value" id="kpi-expenses">—</span>
+              <span class="kpi-trend" id="kpi-expense-pct"></span>
+            </div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-icon stock-icon">📦</div>
+            <div class="kpi-info">
+              <span class="kpi-label">Total Stock</span>
+              <span class="kpi-value" id="kpi-stock">—</span>
+              <span class="kpi-trend" id="kpi-products"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="charts-row">
+          <!-- Revenue Chart -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Revenue Trend</h3>
+              <div class="chart-tabs">
+                <button class="chart-tab active" data-view="monthly" id="tab-monthly">Monthly</button>
+                <button class="chart-tab" data-view="daily" id="tab-daily">Daily</button>
+              </div>
+            </div>
+            <div class="chart-body" id="revenue-chart">
+              <div class="chart-bars-container" id="revenue-bars"></div>
+            </div>
+          </div>
+
+          <!-- Top Products -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Top Products</h3>
+            </div>
+            <div class="chart-body products-list" id="top-products-list">
+              <p class="empty-text">No product data available</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Second Row -->
+        <div class="charts-row">
+          <!-- Expense Categories -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Expense Breakdown</h3>
+            </div>
+            <div class="chart-body" id="expense-chart">
+              <p class="empty-text">No expense data available</p>
+            </div>
+          </div>
+
+          <!-- Inventory / Low Stock -->
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Inventory Status</h3>
+            </div>
+            <div class="chart-body products-list" id="inventory-list">
+              <p class="empty-text">No inventory data available</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="alerts-section" id="alerts-section" style="display:none;">
+          <h3>⚠️ Business Alerts</h3>
+          <div class="alerts-list" id="alerts-list"></div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <a href="/upload" class="action-card">
+            <span class="action-icon">📁</span>
+            <span class="action-title">Upload Data</span>
+            <span class="action-desc">Add more CSV/Excel files</span>
+          </a>
+          <a href="/assistant" class="action-card">
+            <span class="action-icon">💬</span>
+            <span class="action-title">AI Assistant</span>
+            <span class="action-desc">Ask questions about your data</span>
+          </a>
+          <a href="/whatif" class="action-card">
+            <span class="action-icon">🔮</span>
+            <span class="action-title">What-If Scenarios</span>
+            <span class="action-desc">Test business decisions</span>
+          </a>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

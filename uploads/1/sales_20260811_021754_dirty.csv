@@ -1,0 +1,4 @@
+sale date,product name,qty,price,revenue
+2024-01-01,Apple,10.0,2.0,20.0
+2024-01-02,nan,5.0,1.5,7.5
+2024-01-04,Orange,8.0,3.0,100.0

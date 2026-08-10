@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Validation — AI Business Twin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+  <style>
+    .validation-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--white);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--beige);
+      text-align: center;
+    }
+    .stat-card h3 {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .stat-card .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark-brown);
+    }
+    .stat-card .stat-value.error { color: #d32f2f; }
+    .stat-card .stat-value.warning { color: #f57c00; }
+    .stat-card .stat-value.success { color: #388e3c; }
+    
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark-brown);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--beige);
+    }
+    
+    .mapping-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 32px;
+      background: var(--white);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+    }
+    .mapping-table th, .mapping-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--beige);
+      font-size: 0.9rem;
+    }
+    .mapping-table th {
+      background: var(--light-cream);
+      font-weight: 600;
+      color: var(--brown);
+    }
+    
+    .issues-list {
+      max-height: 300px;
+      overflow-y: auto;
+      background: var(--white);
+      border: 1px solid var(--beige);
+      border-radius: var(--radius-sm);
+      margin-bottom: 32px;
+    }
+    .issue-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+    .issue-item:last-child { border-bottom: none; }
+    .issue-icon {
+      font-size: 1.2rem;
+    }
+    .issue-item.error .issue-icon { color: #d32f2f; }
+    .issue-item.warning .issue-icon { color: #f57c00; }
+    .issue-content { flex: 1; }
+    .issue-row { font-weight: 600; color: var(--muted); font-size: 0.8rem; margin-bottom: 2px;}
+    
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 24px;
+    }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--brown);
+      border: 1px solid var(--beige);
+      padding: 12px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover { background: var(--light-cream); }
+    .btn-secondary:disabled, .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-page">
+    <nav class="dashboard-nav">
+      <div class="container">
+        <a href="/" class="nav-logo">AI <span>Business Twin</span></a>
+        <div class="dashboard-nav-right">
+          <a href="/upload" class="dashboard-user" style="text-decoration: none; margin-right: 16px;">Cancel Upload</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="dashboard-content" style="align-items: flex-start; padding-top: 40px;">
+      <div class="validation-container" style="width: 100%;">
+        
+        <div style="margin-bottom: 32px;">
+          <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Data Validation</h1>
+          <p class="auth-subtitle" id="file-info">Loading validation report...</p>
+        </div>
+
+        <div id="validation-content" style="display: none;">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <h3>Total Rows</h3>
+              <div class="stat-value" id="stat-total">-</div>
+            </div>
+            <div class="stat-card">
+              <h3>Valid Rows</h3>
+              <div class="stat-value success" id="stat-valid">-</div>
+            </div>
+            <div class="stat-card">
+              <h3>Errors</h3>
+              <div class="stat-value error" id="stat-errors">-</div>
+            </div>
+            <div class="stat-card">
+              <h3>Warnings</h3>
+              <div class="stat-value warning" id="stat-warnings">-</div>
+            </div>
+            <div class="stat-card">
+              <h3>Duplicates</h3>
+              <div class="stat-value warning" id="stat-duplicates">-</div>
+            </div>
+          </div>
+
+          <h2 class="section-title">Column Mapping</h2>
+          <table class="mapping-table">
+            <thead>
+              <tr>
+                <th>Your Column</th>
+                <th>Mapped To</th>
+              </tr>
+            </thead>
+            <tbody id="mapping-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+
+          <h2 class="section-title">Issues</h2>
+          <div class="issues-list" id="issues-list">
+            <!-- Dynamically populated -->
+          </div>
+
+          <div class="action-bar">
+            <button class="btn-secondary" id="btn-clean">Clean Data</button>
+            <button class="btn btn-primary" id="btn-confirm">Confirm & Save</button>
+          </div>
+          <div class="auth-message" id="action-message" style="margin-top: 16px;"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register — AI Business Twin</title>
+  <meta name="description" content="Create your AI Business Twin account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-container">
+
+      <div class="auth-logo">
+        <a href="/">AI <span>Business Twin</span></a>
+        <p>Get started for free</p>
+      </div>
+
+      <div class="auth-card">
+        <h1>Create your account</h1>
+        <p class="auth-subtitle">Set up your AI Business Twin in under a minute.</p>
+
+        <div class="auth-message" id="auth-message" role="alert"></div>
+
+        <form class="auth-form" id="register-form" novalidate>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Ravi Kumar" required autocomplete="name" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="At least 8 characters" required minlength="8" autocomplete="new-password" />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">Create Account</button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="/login">Log in</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>

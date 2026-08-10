@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Assistant — AI Business Twin</title>
+  <meta name="description" content="Ask your AI Business Assistant questions about your data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+  <link rel="stylesheet" href="/static/css/dashboard.css" />
+</head>
+<body>
+
+  <div class="dashboard-page">
+    <nav class="dashboard-nav">
+      <div class="container">
+        <a href="/" class="nav-logo">AI <span>Business Twin</span></a>
+        <div class="dashboard-nav-links">
+          <a href="/dashboard" class="nav-link">Dashboard</a>
+          <a href="/assistant" class="nav-link active">AI Assistant</a>
+          <a href="/whatif" class="nav-link">What-If</a>
+          <a href="/upload" class="nav-link">Upload</a>
+        </div>
+        <div class="dashboard-nav-right">
+          <span class="dashboard-user">Hello, <strong id="user-name">...</strong></span>
+          <button class="btn-logout" id="logout-btn">Log Out</button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="dashboard-main">
+      <div class="assistant-container">
+        <div class="chat-header">
+          <h1>💬 AI Business Assistant</h1>
+          <p>Ask questions about your business data. Get insights, explanations, and suggestions.</p>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message assistant">
+            <div class="chat-avatar">✦</div>
+            <div class="chat-bubble">
+              <p>Hello! I'm your AI Business Assistant. I can help you understand your business data, explain trends, and suggest improvements.</p>
+              <p>Try asking me something like:</p>
+              <div class="suggested-questions" id="suggestions">
+                <button class="suggestion-chip" data-q="How is my business performing overall?">📊 Business overview</button>
+                <button class="suggestion-chip" data-q="What are my top selling products?">🏆 Top products</button>
+                <button class="suggestion-chip" data-q="How are my profits and margins?">💰 Profit analysis</button>
+                <button class="suggestion-chip" data-q="What trends do you see in my sales data?">📈 Sales trends</button>
+                <button class="suggestion-chip" data-q="Are there any problems I should know about?">⚠️ Issues & alerts</button>
+                <button class="suggestion-chip" data-q="What should I focus on to improve my business?">💡 Suggestions</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <textarea class="chat-input" id="chat-input" placeholder="Ask about your business..." rows="1"></textarea>
+          <button class="chat-send" id="chat-send">Send</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/js/assistant.js"></script>
+</body>
+</html>

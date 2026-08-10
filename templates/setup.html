@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Set Up Your Business — AI Business Twin</title>
+  <meta name="description" content="Set up your AI Business Twin profile." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-container">
+
+      <div class="auth-logo">
+        <a href="/">AI <span>Business Twin</span></a>
+        <p>Step 2 of 2</p>
+      </div>
+
+      <div class="auth-card">
+        <h1>Set Up Your Business</h1>
+        <p class="auth-subtitle">Tell us a bit about your business to get started.</p>
+
+        <div class="auth-message" id="setup-message" role="alert"></div>
+
+        <form class="auth-form" id="setup-form" novalidate>
+          <div class="form-group">
+            <label for="business_name">Business Name</label>
+            <input type="text" id="business_name" name="business_name" placeholder="Sri Lakshmi Kirana Store" required />
+          </div>
+
+          <div class="form-group">
+            <label for="business_type">Business Type</label>
+            <input type="text" id="business_type" name="business_type" placeholder="Grocery" required />
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="Guntur" required />
+          </div>
+
+          <div class="form-group">
+            <label for="currency">Currency</label>
+            <input type="text" id="currency" name="currency" placeholder="INR" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="setup-btn">Complete Setup</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/static/js/setup.js"></script>
+</body>
+</html>

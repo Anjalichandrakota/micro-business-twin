@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — AI Business Twin</title>
+  <meta name="description" content="Log in to your AI Business Twin account." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <link rel="stylesheet" href="/static/css/auth.css" />
+</head>
+<body>
+
+  <main class="auth-page">
+    <div class="auth-container">
+
+      <div class="auth-logo">
+        <a href="/">AI <span>Business Twin</span></a>
+        <p>Welcome back</p>
+      </div>
+
+      <div class="auth-card">
+        <h1>Log in to your account</h1>
+        <p class="auth-subtitle">Enter your email and password to continue.</p>
+
+        <div class="auth-message" id="auth-message" role="alert"></div>
+
+        <form class="auth-form" id="login-form" novalidate>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email" />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Your password" required autocomplete="current-password" />
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">Log In</button>
+        </form>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="/register">Create one</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="/static/js/auth.js"></script>
+</body>
+</html>
